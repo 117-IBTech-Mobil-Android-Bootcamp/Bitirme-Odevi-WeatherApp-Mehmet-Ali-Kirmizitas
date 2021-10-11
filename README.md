@@ -1,0 +1,1 @@
+# Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas
