@@ -1,0 +1,3 @@
+package com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util
+
+const val API_KEY = "f1e59fcf23d54e1b97c111737210810"

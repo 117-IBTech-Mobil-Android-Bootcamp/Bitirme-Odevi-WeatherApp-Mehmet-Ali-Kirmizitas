@@ -1,0 +1,9 @@
+package com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.entity
+
+data class Forecastday(
+    val astro: Astro,
+    val date: String,
+    val date_epoch: Int,
+    val day: Day,
+    val hour: List<Hour>
+)

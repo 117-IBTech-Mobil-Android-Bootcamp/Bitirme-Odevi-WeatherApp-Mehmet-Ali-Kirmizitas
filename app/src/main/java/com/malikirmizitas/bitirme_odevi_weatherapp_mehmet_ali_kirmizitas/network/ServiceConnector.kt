@@ -1,0 +1,4 @@
+package com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network
+
+class ServiceConnector {
+}
