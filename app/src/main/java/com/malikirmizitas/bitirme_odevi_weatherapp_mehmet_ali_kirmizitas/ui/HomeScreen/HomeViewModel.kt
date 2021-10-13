@@ -14,9 +14,9 @@ class HomeViewModel(private val weatherRepository: WeatherRepository) : ViewMode
     val onError = MutableLiveData<Unit>()
     val searchResult = MutableLiveData<SearchStateModel>()
 
-    fun prepareWeather() {
+    fun prepareWeather(city: String) {
         viewModelScope.launch {
-            val remoteResponse = weatherRepository.getCurrentWeatherFromRemote()
+            val remoteResponse = weatherRepository.getCurrentWeatherFromRemote(city)
             when (remoteResponse) {
                 is Result.Success -> {
                     onWeatherFetched.value = HomeViewStateModel(remoteResponse.data!!)

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/currentDayWeather"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="#1A1C49"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autoComplete">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                app:layout_constraintEnd_toStartOf="@id/localDateText"
+                android:id="@+id/todayText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{data.location.name}"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="London" />
+
+            <!--android:text="@{data.weather.location.localtime.substring(0,10)}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/localDateText"
+                app:layout_constraintStart_toEndOf="@id/todayText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{data.location.localtime.substring(0,10)}"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10/10/2021" />
+
+            <!--android:text="@{String.valueOf(data.weather.current.temp_c)}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tempTextCelsius"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:text="@{String.valueOf(data.current.temp_c)}"
+                android:textColor="@color/white"
+                android:textSize="48sp"
+                app:layout_constraintStart_toStartOf="@id/todayText"
+                app:layout_constraintTop_toBottomOf="@id/todayText"
+                tools:text="32" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="°C"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@id/tempTextCelsius"
+                app:layout_constraintTop_toTopOf="@id/tempTextCelsius" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@id/tempTextCelsius"
+                app:layout_constraintStart_toEndOf="@id/tempTextCelsius"
+                tools:text="Clear" />
+
+            <!--android:text="@{String.valueOf(data.weather.current.temp_f)}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tempTextFahrenheit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@{String.valueOf(data.current.temp_f)}"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                app:layout_constraintStart_toStartOf="@id/tempTextCelsius"
+                app:layout_constraintTop_toBottomOf="@id/tempTextCelsius"
+                tools:text="78 °F" />
+
+            <!--imageUrl="@{data.weather.current.condition.icon}"-->
+            <androidx.appcompat.widget.AppCompatImageView
+                imageUrl="@{data.current.condition.icon}"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/tempTextCelsius"
+                app:layout_constraintEnd_toEndOf="@id/localDateText"
+                app:layout_constraintTop_toTopOf="@id/tempTextCelsius"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feelsLikeHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Feels Like:"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@id/tempTextCelsius"
+                app:layout_constraintTop_toBottomOf="@id/tempTextFahrenheit" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feelsLikeTempCelsius"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{String.valueOf(data.current.feelslike_c)}"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@id/feelsLikeHeader"
+                app:layout_constraintTop_toBottomOf="@id/feelsLikeHeader"
+                tools:text="30°C" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="-"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@id/feelsLikeTempCelsius"
+                app:layout_constraintStart_toEndOf="@id/feelsLikeTempCelsius"
+                app:layout_constraintTop_toTopOf="@id/feelsLikeTempCelsius" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{String.valueOf(data.current.feelslike_f)}"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@id/separator"
+                app:layout_constraintStart_toEndOf="@id/separator"
+                app:layout_constraintTop_toTopOf="@id/separator"
+                tools:text="76°F" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

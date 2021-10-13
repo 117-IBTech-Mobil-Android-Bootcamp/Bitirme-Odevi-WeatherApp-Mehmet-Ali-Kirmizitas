@@ -13,7 +13,7 @@ interface WeatherApi {
         @Query("key") apiKey: String,
         @Query("q") city: String,
         @Query("aqi") airQuality: String
-    ): Result<WeatherResponse>
+    ): WeatherResponse?
 
     @GET("forecast.json")
     suspend fun getForecast(
