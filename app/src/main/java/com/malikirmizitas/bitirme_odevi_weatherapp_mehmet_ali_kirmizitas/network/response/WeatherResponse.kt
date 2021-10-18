@@ -7,6 +7,6 @@ import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.enti
 data class WeatherResponse(
 
     val current: Current,
-    val forecast: Forecast,
+    val forecast: Forecast?,
     val location: Location
 )

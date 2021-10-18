@@ -1,6 +1,7 @@
 package com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas
 
 import android.app.Application
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.di.dbModule
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.di.networkModule
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.di.repositoryModule
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.di.viewModelModule
@@ -13,7 +14,7 @@ class WeatherApp : Application() {
 
         startKoin {
             androidContext(this@WeatherApp)
-            modules(repositoryModule, networkModule, viewModelModule)
+            modules(repositoryModule, networkModule, viewModelModule, dbModule)
         }
     }
 }

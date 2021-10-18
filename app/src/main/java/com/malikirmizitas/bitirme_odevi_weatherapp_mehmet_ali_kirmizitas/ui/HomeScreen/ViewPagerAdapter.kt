@@ -5,12 +5,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.R
-import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.databinding.ViewPagerItemBindingImpl
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.base.IBaseRecyclerViewItemClickListener
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.databinding.ViewPagerItemBinding
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
 
 class ViewPagerAdapter(
     private val cityNames: ArrayList<WeatherResponse>,
 ) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
+
+    private var mListener: IBaseRecyclerViewItemClickListener<String>? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder {
         return ViewPagerViewHolder(
             DataBindingUtil.inflate(
@@ -22,17 +26,31 @@ class ViewPagerAdapter(
         )
     }
 
+    fun setListener(listener: IBaseRecyclerViewItemClickListener<String>) {
+        mListener = listener
+    }
+
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
         val city = cityNames[position]
         holder.init(city)
+        holder.setOnClickListener(city, mListener)
     }
 
     override fun getItemCount() = cityNames.size
 
-    inner class ViewPagerViewHolder(private val binding: ViewPagerItemBindingImpl) :
+    inner class ViewPagerViewHolder(private val binding: ViewPagerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun init(data: WeatherResponse) {
             binding.data = data
+        }
+
+        fun setOnClickListener(
+            data: WeatherResponse,
+            itemClickListener: IBaseRecyclerViewItemClickListener<String>?
+        ) {
+            binding.detailIcon.setOnClickListener {
+                itemClickListener!!.onClick(data.location.name)
+            }
         }
     }
 }

@@ -4,5 +4,5 @@ import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.reposit
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory { WeatherRepository(get()) }
+    factory { WeatherRepository(get(), get()) }
 }

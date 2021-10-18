@@ -1,8 +1,7 @@
 package com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network
 
-import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
-import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.Result
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.entity.SearchAutoCompleteItem
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -19,9 +18,9 @@ interface WeatherApi {
     suspend fun getForecast(
         @Query("key") apiKey: String,
         @Query("q") city: String,
-        @Query("days") days: Int,
-        @Query("aqi") airQuality: String,
-        @Query("alerts") alert: String
+        @Query("days") days: Int = 1,
+        @Query("aqi") airQuality: String = "no",
+        @Query("alerts") alert: String = "no"
     ): WeatherResponse?
 
     @GET("search.json")
