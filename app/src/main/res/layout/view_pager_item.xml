@@ -28,16 +28,16 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                app:layout_constraintEnd_toStartOf="@id/localDateText"
                 android:id="@+id/todayText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@{data.location.name}"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 android:textColor="@color/white"
                 android:textSize="32sp"
+                app:layout_constraintEnd_toStartOf="@id/localDateText"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="London" />
@@ -45,7 +45,6 @@
             <!--android:text="@{data.weather.location.localtime.substring(0,10)}"-->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/localDateText"
-                app:layout_constraintStart_toEndOf="@id/todayText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -54,6 +53,7 @@
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/todayText"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="10/10/2021" />
 
@@ -84,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:text="@{data.current.condition.text}"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@id/tempTextCelsius"
@@ -107,7 +108,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 imageUrl="@{data.current.condition.icon}"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="100dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@id/tempTextCelsius"
                 app:layout_constraintEnd_toEndOf="@id/localDateText"
@@ -160,6 +161,15 @@
                 app:layout_constraintStart_toEndOf="@id/separator"
                 app:layout_constraintTop_toTopOf="@id/separator"
                 tools:text="76°F" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/detail_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/detailIcon"
+                app:layout_constraintTop_toTopOf="@id/feelsLikeHeader" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

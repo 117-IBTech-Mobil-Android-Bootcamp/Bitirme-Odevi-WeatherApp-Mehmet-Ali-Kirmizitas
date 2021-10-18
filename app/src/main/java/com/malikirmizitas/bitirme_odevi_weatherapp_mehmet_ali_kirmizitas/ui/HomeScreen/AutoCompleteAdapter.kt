@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.R
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.base.IBaseRecyclerViewItemClickListener
 
 class AutoCompleteAdapter(
     context: Context,
@@ -14,7 +15,7 @@ class AutoCompleteAdapter(
     searchResults: List<String>
 ) : ArrayAdapter<String>(context, 0, textViewResourceId, searchResults) {
 
-    private var mListener: IOnItemListener? = null
+    private var mListener: IBaseRecyclerViewItemClickListener<String>? = null
     private var dataList: List<String>? = searchResults
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
@@ -38,13 +39,8 @@ class AutoCompleteAdapter(
     }
 
     // Custom OnClickListener Setup
-    fun setListener(listener: IOnItemListener) {
+    fun setListener(listener: IBaseRecyclerViewItemClickListener<String>) {
         mListener = listener
-    }
-
-    // Custom OnClickListener Setup that will be Called from the Activity/Fragment
-    interface IOnItemListener {
-        fun onClick(cityName: String)
     }
 
     // Custom Adapter Setup for AutoCompleteTextView
