@@ -9,6 +9,8 @@ import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.base.IB
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.databinding.FragmentHomeBinding
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.ui.HomeViewModel
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.hideKeyboard
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.toastShort
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -18,7 +20,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     var listOfViewPagerItems = arrayListOf<WeatherResponse>()
 
     override fun observeLiveData() {
-        listOfViewPagerItems.clear()
         mviewModel.searchResult.observe(viewLifecycleOwner, {
             dataBinding.weatherResponse = it
             dataBinding.executePendingBindings()
@@ -29,7 +30,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             ).also { it1 ->
                 it1.setListener(object : IBaseRecyclerViewItemClickListener<String> {
                     override fun onClick(cityName: String) {
-                        mviewModel.prepareWeather(cityName)
+                        if (listController(cityName))
+                            toastShort("This city is already added")
+                        else {
+                            mviewModel.prepareWeather(cityName)
+                            toastShort("Successfully added")
+                        }
+                        hideKeyboard()
+                        clearText()
+                    }
+
+                    private fun clearText() {
+                        dataBinding.autoComplete.text.clear()
                     }
                 })
             }
@@ -37,8 +49,21 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         })
         mviewModel.getWeatherFromDB()
         mviewModel.onWeatherFetched.observe(viewLifecycleOwner, { response ->
-            listOfViewPagerItems.add(response.getWeather())
+            val region = response.getWeather().location.region
+            if (!listController(region))
+                listOfViewPagerItems.add(response.getWeather())
         })
+    }
+
+    private fun listController(region: String): Boolean {
+        var isInList = false
+        for (item in listOfViewPagerItems) {
+            if (region.contains(item.location.region)) {
+                isInList = true
+                break
+            }
+        }
+        return isInList
     }
 
     override fun prepareView() {
@@ -52,7 +77,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
 
         })
-
         dataBinding.viewPager.adapter = adapter
         dataBinding.autoComplete.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

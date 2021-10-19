@@ -42,7 +42,7 @@ class DetailFragment : BaseFragment<HomeViewModel, FragmentDetailBinding>() {
                 R.drawable.thunderstorm
             )
             weatherCondition.contains("Clear") -> dataBinding.detailFragmentBackgroundGif.setImageResource(
-                R.drawable.clear
+                R.drawable.clear_night
             )
             weatherCondition.contains("Sunny") -> dataBinding.detailFragmentBackgroundGif.setImageResource(
                 R.drawable.clear
