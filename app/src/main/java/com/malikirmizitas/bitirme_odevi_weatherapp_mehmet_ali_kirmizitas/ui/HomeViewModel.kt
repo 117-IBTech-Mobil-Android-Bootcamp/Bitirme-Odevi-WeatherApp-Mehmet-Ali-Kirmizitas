@@ -1,61 +1,64 @@
 package com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.repository.WeatherRepository
-import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.Result
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
 
-    val onWeatherFetched = MutableLiveData<HomeViewStateModel>()
-    val onForecastWeatherFetched = MutableLiveData<HomeViewStateModel>()
-    private val onError = MutableLiveData<Unit>()
-    val searchResult = MutableLiveData<SearchStateModel>()
+    private val _searchResult = MutableLiveData<SearchStateModel>()
+    val searchResult: LiveData<SearchStateModel>
+        get() = _searchResult
 
-    fun getWeatherFromDB() {
-        viewModelScope.launch {
-            for (weather in weatherRepository.getListAsync()) {
-                onWeatherFetched.value =
-                    HomeViewStateModel(WeatherResponse(weather.current, null, weather.location))
-            }
-        }
+    private val _onForecastWeatherFetched = MutableLiveData<WeatherResponse?>()
+    val onForecastWeatherFetched: LiveData<WeatherResponse?>
+        get() = _onForecastWeatherFetched
+
+    private val _weatherForecast = MutableLiveData<HomeViewStateModel>()
+    val weatherForecast: LiveData<HomeViewStateModel?>
+        get() = _weatherForecast
+
+    init {
+        getWeatherFromDB()
     }
 
-    fun prepareWeather(city: String) {
+    fun getCurrentWeather(city: String) {
         viewModelScope.launch {
-            when (val remoteResponse = weatherRepository.getCurrentWeatherFromRemote(city)) {
-                is Result.Success -> {
-                    onWeatherFetched.value = HomeViewStateModel(remoteResponse.data!!)
-                }
-                is Result.Error -> onError.value = Unit
+            weatherRepository.getCurrentFromRemote(city).collect {
+                _weatherForecast.value = HomeViewStateModel(it!!)
             }
         }
+        getWeatherFromDB()
     }
 
     fun getForecastWeather(city: String) {
         viewModelScope.launch {
-            when (val remoteResponse = weatherRepository.getForecastFromRemote(city)) {
-                is Result.Success -> {
-                    onForecastWeatherFetched.value = HomeViewStateModel(remoteResponse.data!!)
-                }
-                is Result.Error -> onError.value = Unit
+            weatherRepository.getForecastFromRemote(city).collect {
+                _onForecastWeatherFetched.value = it
+            }
+        }
+    }
+
+    private fun getWeatherFromDB() {
+        viewModelScope.launch {
+            delay(1000)
+            for (weather in weatherRepository.getListAsync()) {
+                _weatherForecast.value =
+                    HomeViewStateModel(WeatherResponse(weather.current, null, weather.location))
             }
         }
     }
 
     fun getLocationBySearch(city: String) {
         viewModelScope.launch {
-
-            when (val response = weatherRepository.getSearchedLocationWeather(city)) {
-                is Result.Success -> {
-                    searchResult.value = SearchStateModel(response.data!!)
-                }
-                is Result.Error -> {
-                    onError.value = Unit
-                }
+            weatherRepository.getSearchedLocationWeather(city).collect {
+                _searchResult.value = SearchStateModel(it)
             }
         }
     }

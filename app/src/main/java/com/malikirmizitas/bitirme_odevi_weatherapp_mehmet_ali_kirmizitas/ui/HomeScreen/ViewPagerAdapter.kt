@@ -10,9 +10,9 @@ import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.databin
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
 
 class ViewPagerAdapter(
-    private val cityNames: ArrayList<WeatherResponse>,
 ) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
 
+    private lateinit var cityNames: ArrayList<WeatherResponse>
     private var mListener: IBaseRecyclerViewItemClickListener<String>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder {
@@ -24,6 +24,10 @@ class ViewPagerAdapter(
                 false
             )
         )
+    }
+
+    fun setList(cityNames: ArrayList<WeatherResponse>) {
+        this.cityNames = cityNames
     }
 
     fun setListener(listener: IBaseRecyclerViewItemClickListener<String>) {

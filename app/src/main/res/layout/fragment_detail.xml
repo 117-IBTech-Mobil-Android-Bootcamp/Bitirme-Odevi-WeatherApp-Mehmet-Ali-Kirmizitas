@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.ui.HomeViewStateModel" />
+            type="com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse" />
     </data>
 
     <FrameLayout
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="@{data.weather.location.name}"
+                    android:text="@{data.location.name}"
                     android:textColor="@color/white"
                     android:textSize="50sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="@{String.valueOf(data.weather.current.temp_c)}"
+                    android:text="@{String.valueOf(data.current.temp_c)}"
                     android:textColor="@color/white"
                     android:textSize="52sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
                     android:id="@+id/conditionText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{data.weather.current.condition.text}"
+                    android:text="@{data.current.condition.text}"
                     android:textColor="@color/white"
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="@id/currentTempCelsius"
@@ -129,7 +129,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="6dp"
-                        android:text="@{String.valueOf(data.weather.current.feelslike_c)}"
+                        android:text="@{String.valueOf(data.current.feelslike_c)}"
                         android:textColor="@color/white"
                         android:textSize="32sp"
                         tools:text="14" />
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="6dp"
-                        android:text="@{String.valueOf(data.weather.current.gust_kph)}"
+                        android:text="@{String.valueOf(data.current.gust_kph)}"
                         android:textColor="@color/white"
                         android:textSize="32sp"
                         tools:text="14" />
@@ -178,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="6dp"
-                        android:text="@{String.valueOf(data.weather.current.humidity)}"
+                        android:text="@{String.valueOf(data.current.humidity)}"
                         android:textColor="@color/white"
                         android:textSize="32sp"
                         tools:text="14" />
@@ -197,7 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="6dp"
-                        android:text="@{String.valueOf(data.weather.current.pressure_mb)}"
+                        android:text="@{String.valueOf(data.current.pressure_mb)}"
                         android:textColor="@color/white"
                         android:textSize="32sp"
                         tools:text="14" />

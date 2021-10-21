@@ -1,7 +1,9 @@
 package com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.ui.HomeScreen
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.navigation.fragment.findNavController
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.R
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.base.BaseFragment
@@ -9,8 +11,10 @@ import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.base.IB
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.databinding.FragmentHomeBinding
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.ui.HomeViewModel
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.gone
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.hideKeyboard
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.toastShort
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -18,8 +22,20 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun getLayoutID() = R.layout.fragment_home
     var listOfViewPagerItems = arrayListOf<WeatherResponse>()
+    private val viewPagerAdapter = ViewPagerAdapter()
 
     override fun observeLiveData() {
+        mviewModel.weatherForecast.observe(this, {response->
+            Log.e("Data is", response?.getWeather()?.location!!.name)
+            if (listOfViewPagerItems.size > 0) {
+                dataBinding.viewPager.visible()
+                dataBinding.emptyListText.gone()
+            }
+            val region = response.getWeather().location.region
+            if (!listController(region))
+                listOfViewPagerItems.add(response.getWeather())
+        })
+
         mviewModel.searchResult.observe(viewLifecycleOwner, {
             dataBinding.weatherResponse = it
             dataBinding.executePendingBindings()
@@ -29,12 +45,14 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 it.getResults()
             ).also { it1 ->
                 it1.setListener(object : IBaseRecyclerViewItemClickListener<String> {
+                    @SuppressLint("NotifyDataSetChanged")
                     override fun onClick(cityName: String) {
                         if (listController(cityName))
                             toastShort("This city is already added")
                         else {
-                            mviewModel.prepareWeather(cityName)
+                            mviewModel.getCurrentWeather(cityName)
                             toastShort("Successfully added")
+                            viewPagerAdapter.notifyDataSetChanged()
                         }
                         hideKeyboard()
                         clearText()
@@ -46,12 +64,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 })
             }
             dataBinding.autoComplete.setAdapter(adapter)
-        })
-        mviewModel.getWeatherFromDB()
-        mviewModel.onWeatherFetched.observe(viewLifecycleOwner, { response ->
-            val region = response.getWeather().location.region
-            if (!listController(region))
-                listOfViewPagerItems.add(response.getWeather())
         })
     }
 
@@ -67,8 +79,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     override fun prepareView() {
-        val adapter = ViewPagerAdapter(listOfViewPagerItems)
-        adapter.setListener(object :
+        viewPagerAdapter.setList(listOfViewPagerItems)
+        viewPagerAdapter.setListener(object :
             IBaseRecyclerViewItemClickListener<String> {
             override fun onClick(clickedObject: String) {
                 val action =
@@ -77,7 +89,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
 
         })
-        dataBinding.viewPager.adapter = adapter
+        dataBinding.viewPager.adapter = viewPagerAdapter
         dataBinding.autoComplete.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -86,7 +98,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 if (s?.length!! > 1)
                     mviewModel.getLocationBySearch(s.toString())
             }
-
             override fun afterTextChanged(s: Editable?) {
             }
         })
