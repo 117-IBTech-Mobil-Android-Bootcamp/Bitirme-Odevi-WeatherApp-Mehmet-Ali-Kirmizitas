@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.entity.Weather
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.repository.WeatherRepository
 import kotlinx.coroutines.delay
@@ -47,11 +48,19 @@ class HomeViewModel(private val weatherRepository: WeatherRepository) : ViewMode
 
     private fun getWeatherFromDB() {
         viewModelScope.launch {
-            delay(1000)
             for (weather in weatherRepository.getListAsync()) {
                 _weatherForecast.value =
                     HomeViewStateModel(WeatherResponse(weather.current, null, weather.location))
             }
+        }
+    }
+
+    fun updateDBItems(weather: Weather) {
+        viewModelScope.launch {
+            weatherRepository.deleteItemAsync(weather)
+            delay(200)
+            weatherRepository.getCurrentFromRemote(weather.location.name)
+            getWeatherFromDB()
         }
     }
 

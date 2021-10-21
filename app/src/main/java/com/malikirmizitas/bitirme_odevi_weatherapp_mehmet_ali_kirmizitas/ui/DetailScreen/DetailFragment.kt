@@ -39,6 +39,9 @@ class DetailFragment : BaseFragment<HomeViewModel, FragmentDetailBinding>() {
             weatherCondition.contains("rain") -> dataBinding.detailFragmentBackgroundGif.setImageResource(
                 R.drawable.light_rain
             )
+            weatherCondition.contains("Light drizzle") -> dataBinding.detailFragmentBackgroundGif.setImageResource(
+                R.drawable.light_rain
+            )
             weatherCondition.contains("cloud") -> dataBinding.detailFragmentBackgroundGif.setImageResource(
                 R.drawable.partly_cloud
             )

@@ -31,6 +31,8 @@ class WeatherRepository(private val api: WeatherApi, private val weatherDAO: Wea
         emit(response)
     }.flowOn(Dispatchers.IO)
 
+    suspend fun deleteItemAsync(weather: Weather) = weatherDAO.deleteCity(weather)
+
     private suspend fun insertDataAsync(weather: Weather) = weatherDAO.insertWeather(weather)
 
     suspend fun getListAsync(): List<Weather> {

@@ -1,9 +1,6 @@
 package com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.entity.Weather
 
 @Dao
@@ -14,4 +11,7 @@ interface WeatherDAO {
 
     @Query("SELECT * FROM Forecast")
     suspend fun fetchWeather(): List<Weather>
+
+    @Delete
+    suspend fun deleteCity(weather: Weather)
 }

@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import java.util.*
 
 fun Fragment.toastShort(messageToShow: String) {
     Toast.makeText(requireContext(), messageToShow, Toast.LENGTH_SHORT).show()
@@ -45,4 +46,15 @@ fun Activity.hideKeyboard() {
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun getCurrentDate(): Date {
+    val calendar: Calendar = Calendar.getInstance()
+    val day: Int = calendar.get(Calendar.DAY_OF_MONTH)
+    val month: Int = calendar.get(Calendar.MONTH)
+    val year: Int = calendar.get(Calendar.YEAR)
+
+    calendar[year, month] = day
+
+    return calendar.time
 }

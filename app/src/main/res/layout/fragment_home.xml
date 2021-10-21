@@ -32,7 +32,9 @@
             android:layout_height="60dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:padding="5dp"
+            android:background="@drawable/auto_complete_background"
+            android:hint="@string/search_hint"
+            android:padding="10dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.viewpager2.widget.ViewPager2
