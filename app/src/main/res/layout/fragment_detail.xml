@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/celsius"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/default_text_size_medium"
+                    android:textSize="@dimen/default_text_size_small"
                     app:layout_constraintBottom_toTopOf="@id/conditionText"
                     app:layout_constraintStart_toEndOf="@id/currentTempCelsius"
                     app:layout_constraintTop_toTopOf="@id/currentTempCelsius"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{data.current.condition.text}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/default_text_size_medium"
+                    android:textSize="@dimen/default_text_size_small"
                     app:layout_constraintBottom_toBottomOf="@id/currentTempCelsius"
                     app:layout_constraintStart_toEndOf="@id/currentTempCelsius"
                     app:layout_constraintTop_toBottomOf="@id/celsiusText"
@@ -127,11 +127,11 @@
                         android:textSize="@dimen/default_text_size_small" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        feltWithCelsius="@{String.valueOf(data.current.feelslike_c)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/default_margin_xxsmall"
-                        android:text="@{String.valueOf(data.current.feelslike_c)}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/default_text_size_large"
                         tools:text="14" />
@@ -146,11 +146,11 @@
                         android:textSize="@dimen/default_text_size_small" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        gustWithKPH="@{String.valueOf(data.current.gust_kph)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/default_margin_xxsmall"
-                        android:text="@{String.valueOf(data.current.gust_kph)}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/default_text_size_large"
                         tools:text="14" />
@@ -176,11 +176,11 @@
                         android:textSize="@dimen/default_text_size_small" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        humidityText="@{String.valueOf(data.current.humidity)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/default_margin_xxsmall"
-                        android:text="@{String.valueOf(data.current.humidity)}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/default_text_size_large"
                         tools:text="14" />
@@ -195,11 +195,11 @@
                         android:textSize="@dimen/default_text_size_small" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        pressureWithText="@{String.valueOf(data.current.pressure_mb)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/default_margin_xxsmall"
-                        android:text="@{String.valueOf(data.current.pressure_mb)}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/default_text_size_large"
                         tools:text="14" />

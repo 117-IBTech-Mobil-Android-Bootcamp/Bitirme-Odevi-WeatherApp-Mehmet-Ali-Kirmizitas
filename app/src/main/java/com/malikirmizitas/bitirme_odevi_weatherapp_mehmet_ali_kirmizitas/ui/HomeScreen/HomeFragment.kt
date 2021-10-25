@@ -24,7 +24,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private lateinit var connectionLiveData: ConnectivityLiveData
     private var isConnected = false
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "NotifyDataSetChanged")
     override fun observeLiveData() {
 
         connectionLiveData = ConnectivityLiveData(requireActivity().application)
@@ -53,8 +53,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 dataBinding.emptyListText.visible()
             }
             val region = response!!.getWeather().location.region
-            if (!listController(region))
+            if (!listController(region)) {
                 listOfViewPagerItems.add(response.getWeather())
+                dataBinding.viewPager.adapter?.notifyDataSetChanged()
+            }
             val responseDate = response.getWeather().location.localtime.substring(0, 10)
             if (responseDate != date) {
                 updateDB(response.getWeather())
@@ -70,15 +72,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 it.getResults()
             ).also { it1 ->
                 it1.setListener(object : IBaseRecyclerViewItemClickListener<String> {
-                    @SuppressLint("NotifyDataSetChanged")
                     override fun onClick(clickedObject: String) {
                         if (listController(clickedObject))
                             toastShort("This city is already added")
                         else {
                             mviewModel.getCurrentWeather(clickedObject)
                             toastShort("Successfully added")
-                            viewPagerAdapter.notifyItemInserted(listOfViewPagerItems.size)
-                            viewPagerAdapter.notifyDataSetChanged()
                         }
                         hideKeyboard()
                         clearText()
@@ -97,7 +96,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private fun updateDB(weather: WeatherResponse) {
         mviewModel.updateDBItems(Weather(weather.current, weather.location))
         listOfViewPagerItems.remove(weather)
-        viewPagerAdapter.notifyDataSetChanged()
+        dataBinding.viewPager.adapter?.notifyDataSetChanged()
     }
 
     private fun listController(region: String): Boolean {
