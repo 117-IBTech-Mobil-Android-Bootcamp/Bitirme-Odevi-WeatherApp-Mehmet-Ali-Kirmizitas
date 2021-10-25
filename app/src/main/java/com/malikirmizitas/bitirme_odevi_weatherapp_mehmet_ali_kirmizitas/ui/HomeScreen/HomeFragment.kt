@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override val mviewModel: HomeViewModel by viewModel()
 
+    override fun getStatusBarColor() = R.color.champagne_pink
     override fun getLayoutID() = R.layout.fragment_home
     private var listOfViewPagerItems = arrayListOf<WeatherResponse>()
     private val viewPagerAdapter = ViewPagerAdapter()

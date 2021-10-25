@@ -11,6 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DetailFragment : BaseFragment<HomeViewModel, FragmentDetailBinding>() {
     override val mviewModel: HomeViewModel by viewModel()
     private val adapter = WeatherDetailAdapter()
+    override fun getStatusBarColor() = android.R.color.transparent
 
     private val args: DetailFragmentArgs by navArgs()
     override fun getLayoutID() = R.layout.fragment_detail
