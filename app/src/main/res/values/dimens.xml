@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- margin -->
+    <dimen name="default_margin_xxsmall">8dp</dimen>
+    <dimen name="default_margin_xsmall">12dp</dimen>
+    <dimen name="default_margin_small">16dp</dimen>
+    <dimen name="default_margin_medium">24dp</dimen>
+    <dimen name="default_margin_large">32dp</dimen>
+    <dimen name="default_margin_xlarge">48dp</dimen>
+    <dimen name="default_margin_xxlarge">60dp</dimen>
+
+    <!-- padding -->
+    <dimen name="default_padding_xxsmall">8dp</dimen>
+    <dimen name="default_padding_xsmall">10dp</dimen>
+    <dimen name="default_padding_small">14dp</dimen>
+    <dimen name="default_padding_medium">18dp</dimen>
+    <dimen name="default_padding_large">24dp</dimen>
+    <dimen name="default_padding_xlarge">32dp</dimen>
+    <dimen name="default_padding_xxlarge">38dp</dimen>
+
+    <!-- Radius -->
+    <dimen name="card_view_default_radius_small">20dp</dimen>
+    <dimen name="card_view_default_radius_medium">30dp</dimen>
+    <dimen name="card_view_default_radius_large">50dp</dimen>
+
+    <!-- height -->
+    <dimen name="default_weather_condition_image_height">60dp</dimen>
+    <dimen name="splash_logo_height">300dp</dimen>
+
+    <!-- width -->
+    <dimen name="default_weather_condition_image_width">80dp</dimen>
+    <dimen name="splash_logo_width">300dp</dimen>
+
+    <!--text size-->
+    <dimen name="default_text_size_xxsmall">8sp</dimen>
+    <dimen name="default_text_size_xsmall">14sp</dimen>
+    <dimen name="default_text_size_small">18sp</dimen>
+    <dimen name="default_text_size_medium">24sp</dimen>
+    <dimen name="default_text_size_large">32sp</dimen>
+    <dimen name="default_text_size_xlarge">48sp</dimen>
+
+</resources>

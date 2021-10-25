@@ -15,10 +15,10 @@
         android:id="@+id/currentDayWeather"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
-        app:cardBackgroundColor="#1A1C49"
-        app:cardCornerRadius="20dp"
+        android:layout_marginHorizontal="@dimen/default_margin_medium"
+        android:layout_marginVertical="@dimen/default_margin_small"
+        app:cardBackgroundColor="@color/view_pager_item_background"
+        app:cardCornerRadius="@dimen/card_view_default_radius_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/autoComplete">
@@ -31,41 +31,39 @@
                 android:id="@+id/todayText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/default_margin_small"
+                android:layout_marginTop="@dimen/default_margin_small"
                 android:text="@{data.location.name}"
                 android:textColor="@color/white"
-                android:textSize="32sp"
+                android:textSize="@dimen/default_text_size_large"
                 app:layout_constraintEnd_toStartOf="@id/localDateText"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="London" />
 
-            <!--android:text="@{data.weather.location.localtime.substring(0,10)}"-->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/localDateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="@dimen/default_margin_small"
+                android:layout_marginEnd="@dimen/default_margin_small"
                 android:text="@{data.location.localtime.substring(0,10)}"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/default_text_size_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/todayText"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="10/10/2021" />
 
-            <!--android:text="@{String.valueOf(data.weather.current.temp_c)}"-->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tempTextCelsius"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="@dimen/default_margin_xxlarge"
                 android:text="@{String.valueOf(data.current.temp_c)}"
                 android:textColor="@color/white"
-                android:textSize="48sp"
+                android:textSize="@dimen/default_text_size_xlarge"
                 app:layout_constraintStart_toStartOf="@id/todayText"
                 app:layout_constraintTop_toBottomOf="@id/todayText"
                 tools:text="32" />
@@ -73,43 +71,41 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="°C"
+                android:layout_marginStart="@dimen/default_margin_xxsmall"
+                android:text="@string/celsius"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/default_text_size_medium"
                 app:layout_constraintStart_toEndOf="@id/tempTextCelsius"
                 app:layout_constraintTop_toTopOf="@id/tempTextCelsius" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="@dimen/default_margin_xxsmall"
                 android:text="@{data.current.condition.text}"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/default_text_size_medium"
                 app:layout_constraintBottom_toBottomOf="@id/tempTextCelsius"
                 app:layout_constraintStart_toEndOf="@id/tempTextCelsius"
                 tools:text="Clear" />
 
-            <!--android:text="@{String.valueOf(data.weather.current.temp_f)}"-->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tempTextFahrenheit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/default_margin_medium"
                 android:text="@{String.valueOf(data.current.temp_f)}"
                 android:textColor="@color/white"
-                android:textSize="36sp"
+                android:textSize="@dimen/default_text_size_large"
                 app:layout_constraintStart_toStartOf="@id/tempTextCelsius"
                 app:layout_constraintTop_toBottomOf="@id/tempTextCelsius"
                 tools:text="78 °F" />
 
-            <!--imageUrl="@{data.weather.current.condition.icon}"-->
             <androidx.appcompat.widget.AppCompatImageView
                 imageUrl="@{data.current.condition.icon}"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_marginEnd="16dp"
+                android:layout_width="@dimen/default_weather_condition_image_width"
+                android:layout_height="@dimen/default_weather_condition_image_height"
+                android:layout_marginEnd="@dimen/default_margin_small"
                 app:layout_constraintBottom_toBottomOf="@id/tempTextCelsius"
                 app:layout_constraintEnd_toEndOf="@id/localDateText"
                 app:layout_constraintTop_toTopOf="@id/tempTextCelsius"
@@ -119,10 +115,10 @@
                 android:id="@+id/feelsLikeHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Feels Like:"
+                android:layout_marginTop="@dimen/default_margin_large"
+                android:text="@string/felt_temperature"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/default_text_size_medium"
                 app:layout_constraintStart_toStartOf="@id/tempTextCelsius"
                 app:layout_constraintTop_toBottomOf="@id/tempTextFahrenheit" />
 
@@ -130,10 +126,10 @@
                 android:id="@+id/feelsLikeTempCelsius"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/default_margin_small"
                 android:text="@{String.valueOf(data.current.feelslike_c)}"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/default_text_size_medium"
                 app:layout_constraintStart_toStartOf="@id/feelsLikeHeader"
                 app:layout_constraintTop_toBottomOf="@id/feelsLikeHeader"
                 tools:text="30°C" />
@@ -142,10 +138,10 @@
                 android:id="@+id/separator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="@dimen/default_margin_xxsmall"
                 android:text="-"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/default_text_size_medium"
                 app:layout_constraintBottom_toBottomOf="@id/feelsLikeTempCelsius"
                 app:layout_constraintStart_toEndOf="@id/feelsLikeTempCelsius"
                 app:layout_constraintTop_toTopOf="@id/feelsLikeTempCelsius" />
@@ -153,22 +149,22 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="@dimen/default_margin_xxsmall"
                 android:text="@{String.valueOf(data.current.feelslike_f)}"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/default_text_size_medium"
                 app:layout_constraintBottom_toBottomOf="@id/separator"
                 app:layout_constraintStart_toEndOf="@id/separator"
                 app:layout_constraintTop_toTopOf="@id/separator"
                 tools:text="76°F" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/detailIcon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/default_margin_small"
                 android:src="@drawable/detail_icon"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/detailIcon"
                 app:layout_constraintTop_toTopOf="@id/feelsLikeHeader" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY" />
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,11 +33,11 @@
                     android:id="@+id/locationName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="@dimen/default_margin_medium"
+                    android:layout_marginTop="@dimen/default_margin_medium"
                     android:text="@{data.location.name}"
                     android:textColor="@color/white"
-                    android:textSize="50sp"
+                    android:textSize="@dimen/default_text_size_xlarge"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Malibu" />
@@ -52,10 +53,10 @@
                     android:id="@+id/currentTempCelsius"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="@dimen/default_margin_small"
                     android:text="@{String.valueOf(data.current.temp_c)}"
                     android:textColor="@color/white"
-                    android:textSize="52sp"
+                    android:textSize="@dimen/default_text_size_xlarge"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/blankView"
                     tools:text="32" />
@@ -64,9 +65,9 @@
                     android:id="@+id/celsiusText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="°C"
+                    android:text="@string/celsius"
                     android:textColor="@color/white"
-                    android:textSize="22sp"
+                    android:textSize="@dimen/default_text_size_medium"
                     app:layout_constraintBottom_toTopOf="@id/conditionText"
                     app:layout_constraintStart_toEndOf="@id/currentTempCelsius"
                     app:layout_constraintTop_toTopOf="@id/currentTempCelsius"
@@ -78,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{data.current.condition.text}"
                     android:textColor="@color/white"
-                    android:textSize="22sp"
+                    android:textSize="@dimen/default_text_size_medium"
                     app:layout_constraintBottom_toBottomOf="@id/currentTempCelsius"
                     app:layout_constraintStart_toEndOf="@id/currentTempCelsius"
                     app:layout_constraintTop_toBottomOf="@id/celsiusText"
@@ -88,7 +89,7 @@
                     android:id="@+id/weatherRecyclerView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="@dimen/default_margin_medium"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -100,17 +101,18 @@
                     android:id="@+id/detailHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Weather Detail"
+                    android:layout_marginStart="@dimen/default_margin_small"
+                    android:layout_marginTop="@dimen/default_margin_medium"
+                    android:text="@string/weather_detail"
                     android:textColor="@color/white"
-                    android:textSize="32sp"
+                    android:textSize="@dimen/default_text_size_large"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/weatherRecyclerView" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="24dp"
+                    android:layout_marginVertical="@dimen/default_margin_medium"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/detailHeader"
@@ -120,46 +122,46 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Felt temperature"
+                        android:text="@string/felt_temperature"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/default_text_size_small" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="@dimen/default_margin_xxsmall"
                         android:text="@{String.valueOf(data.current.feelslike_c)}"
                         android:textColor="@color/white"
-                        android:textSize="32sp"
+                        android:textSize="@dimen/default_text_size_large"
                         tools:text="14" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="32dp"
-                        android:text="Gust"
+                        android:layout_marginTop="@dimen/default_margin_large"
+                        android:text="@string/gust"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/default_text_size_small" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="@dimen/default_margin_xxsmall"
                         android:text="@{String.valueOf(data.current.gust_kph)}"
                         android:textColor="@color/white"
-                        android:textSize="32sp"
+                        android:textSize="@dimen/default_text_size_large"
                         tools:text="14" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="0dp"
                     android:id="@+id/rightLinearLayout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="24dp"
+                    android:layout_marginVertical="@dimen/default_margin_medium"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/detailHeader"
@@ -169,37 +171,37 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="humidity"
+                        android:text="@string/humidity"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/default_text_size_small" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="@dimen/default_margin_xxsmall"
                         android:text="@{String.valueOf(data.current.humidity)}"
                         android:textColor="@color/white"
-                        android:textSize="32sp"
+                        android:textSize="@dimen/default_text_size_large"
                         tools:text="14" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="32dp"
-                        android:text="Pressure"
+                        android:layout_marginTop="@dimen/default_margin_large"
+                        android:text="@string/pressure"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/default_text_size_small" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="@dimen/default_margin_xxsmall"
                         android:text="@{String.valueOf(data.current.pressure_mb)}"
                         android:textColor="@color/white"
-                        android:textSize="32sp"
+                        android:textSize="@dimen/default_text_size_large"
                         tools:text="14" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -207,14 +209,14 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin_medium"
+                    android:layout_marginBottom="@dimen/default_margin_medium"
+                    android:text="@string/malikirmizitas"
+                    android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="Malikirmizitas"
-                    app:layout_constraintTop_toBottomOf="@id/rightLinearLayout"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:textColor="@color/white"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rightLinearLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
