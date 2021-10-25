@@ -7,12 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.entity.Weather
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.repository.WeatherRepository
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.Result
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
 
+    val onError = MutableLiveData<Boolean>()
     private val _searchResult = MutableLiveData<SearchStateModel>()
     val searchResult: LiveData<SearchStateModel>
         get() = _searchResult
@@ -32,21 +34,26 @@ class HomeViewModel(private val weatherRepository: WeatherRepository) : ViewMode
     fun getCurrentWeather(city: String) {
         viewModelScope.launch {
             weatherRepository.getCurrentFromRemote(city).collect {
-                _weatherForecast.value = HomeViewStateModel(it!!)
+                _weatherForecast.value = HomeViewStateModel(it)
             }
+            getWeatherFromDB()
         }
-        getWeatherFromDB()
     }
 
     fun getForecastWeather(city: String) {
         viewModelScope.launch {
             weatherRepository.getForecastFromRemote(city).collect {
-                _onForecastWeatherFetched.value = it
+                when (it) {
+                    is Result.Success ->
+                        _onForecastWeatherFetched.value = it.data
+                    is Result.Error ->
+                        onError.value = true
+                }
             }
         }
     }
 
-    private fun getWeatherFromDB() {
+    fun getWeatherFromDB() {
         viewModelScope.launch {
             for (weather in weatherRepository.getListAsync()) {
                 _weatherForecast.value =

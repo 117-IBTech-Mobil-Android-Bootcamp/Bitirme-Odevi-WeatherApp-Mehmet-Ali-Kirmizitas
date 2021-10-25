@@ -3,7 +3,6 @@ package com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.ui.Hom
 import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.navigation.fragment.findNavController
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.R
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.base.BaseFragment
@@ -78,9 +77,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                         else {
                             mviewModel.getCurrentWeather(clickedObject)
                             toastShort("Successfully added")
-                            viewPagerAdapter.notifyItemInserted(listOfViewPagerItems.size+1)
+                            viewPagerAdapter.notifyItemInserted(listOfViewPagerItems.size)
                             viewPagerAdapter.notifyDataSetChanged()
-                            Log.e("Malin", listOfViewPagerItems.size.toString())
                         }
                         hideKeyboard()
                         clearText()

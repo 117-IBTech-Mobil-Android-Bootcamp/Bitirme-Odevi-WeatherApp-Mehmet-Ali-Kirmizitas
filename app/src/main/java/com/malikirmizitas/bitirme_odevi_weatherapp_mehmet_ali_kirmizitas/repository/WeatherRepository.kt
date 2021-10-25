@@ -4,21 +4,24 @@ import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.Weat
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.entity.SearchAutoComplete
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.entity.Weather
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.WeatherApi
-import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.util.Result
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class WeatherRepository(private val api: WeatherApi, private val weatherDAO: WeatherDAO) {
 
-    fun getForecastFromRemote(city: String): Flow<WeatherResponse?> = flow {
-        val response = api.getForecast(city = city)
-        if (response != null)
-            emit(response)
+    fun getForecastFromRemote(city: String) = flow {
+        try {
+            val response = api.getForecast(city = city)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e))
+        }
     }.flowOn(Dispatchers.IO)
 
-    fun getCurrentFromRemote(city: String): Flow<WeatherResponse?> = flow {
+    fun getCurrentFromRemote(city: String) = flow {
         val response = api.getCurrentCityWeather(city = city)
         if (response != null) {
             emit(response)
@@ -26,7 +29,7 @@ class WeatherRepository(private val api: WeatherApi, private val weatherDAO: Wea
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getSearchedLocationWeather(city: String): Flow<SearchAutoComplete> = flow {
+    fun getSearchedLocationWeather(city: String)= flow {
         val response = SearchAutoComplete(api.getSearchAutoComplete(city = city))
         emit(response)
     }.flowOn(Dispatchers.IO)
