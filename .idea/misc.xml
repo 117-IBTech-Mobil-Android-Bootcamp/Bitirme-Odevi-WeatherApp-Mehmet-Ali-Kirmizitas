@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/malik/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.15260416666666668" />
         <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/drawable/auto_complete_background.xml" value="0.262037037037037" />
+        <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.25925925925925924" />
         <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/layout/activity_home.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/layout/activity_splash.xml" value="0.259375" />
         <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/layout/city_auto_complete_list_item.xml" value="0.13333333333333333" />
@@ -12,7 +13,7 @@
         <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/layout/forecast_weather_item.xml" value="0.264" />
         <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/layout/fragment_detail.xml" value="0.2" />
         <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/layout/view_pager_item.xml" value="0.136" />
+        <entry key="..\:/Users/malik/Documents/GitHub/Bitirme-Odevi-WeatherApp-Mehmet-Ali-Kirmizitas/app/src/main/res/layout/view_pager_item.xml" value="0.2742796157950907" />
       </map>
     </option>
   </component>

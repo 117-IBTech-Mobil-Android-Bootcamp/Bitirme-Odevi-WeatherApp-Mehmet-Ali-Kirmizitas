@@ -10,4 +10,5 @@
     <string name="pressure">Pressure</string>
     <string name="malikirmizitas">Malikirmizitas</string>
     <string name="gust">Gust</string>
+    <string name="current_temp_header">Current Temp</string>
 </resources>

@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/default_margin_medium"
-        android:layout_marginVertical="@dimen/default_margin_small"
+        android:layout_marginVertical="@dimen/default_margin_large"
         app:cardBackgroundColor="@color/view_pager_item_background"
         app:cardCornerRadius="@dimen/card_view_default_radius_small"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,85 +31,90 @@
                 android:id="@+id/todayText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin_small"
                 android:layout_marginTop="@dimen/default_margin_small"
                 android:text="@{data.location.name}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_text_size_large"
-                app:layout_constraintEnd_toStartOf="@id/localDateText"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="London" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/conditionIcon"
+                imageUrl="@{data.current.condition.icon}"
+                android:layout_width="@dimen/default_weather_condition_image_width"
+                android:layout_height="@dimen/default_weather_condition_image_height"
+                android:layout_marginTop="@dimen/default_margin_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/todayText"
+                tools:src="@drawable/ic_launcher_background" />
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/localDateText"
+                android:id="@+id/conditionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin_small"
-                android:layout_marginEnd="@dimen/default_margin_small"
-                android:text="@{data.location.localtime.substring(0,10)}"
+                android:text="@{data.current.condition.text}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_text_size_medium"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/todayText"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="10/10/2021" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/conditionIcon"
+                tools:text="Clear" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/currentTempHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_small"
+                android:text="@string/current_temp_header"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_text_size_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/conditionText" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tempTextCelsius"
+                degreeCelsius="@{String.valueOf(data.current.temp_c)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_xxlarge"
-                android:text="@{String.valueOf(data.current.temp_c)}"
+                android:layout_marginTop="@dimen/default_margin_small"
                 android:textColor="@color/white"
-                android:textSize="@dimen/default_text_size_xlarge"
-                app:layout_constraintStart_toStartOf="@id/todayText"
-                app:layout_constraintTop_toBottomOf="@id/todayText"
-                tools:text="32" />
+                android:textSize="@dimen/default_text_size_large"
+                app:layout_constraintEnd_toStartOf="@+id/separatorCurrent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/currentTempHeader"
+                tools:text="32°C" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/separatorCurrent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin_xxsmall"
-                android:text="@string/celsius"
+                android:layout_marginHorizontal="@dimen/default_margin_xxsmall"
+                android:text="-"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_text_size_medium"
+                app:layout_constraintBottom_toBottomOf="@id/tempTextCelsius"
+                app:layout_constraintEnd_toStartOf="@id/tempTextFahrenheit"
                 app:layout_constraintStart_toEndOf="@id/tempTextCelsius"
                 app:layout_constraintTop_toTopOf="@id/tempTextCelsius" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin_xxsmall"
-                android:text="@{data.current.condition.text}"
-                android:textColor="@color/white"
-                android:textSize="@dimen/default_text_size_medium"
-                app:layout_constraintBottom_toBottomOf="@id/tempTextCelsius"
-                app:layout_constraintStart_toEndOf="@id/tempTextCelsius"
-                tools:text="Clear" />
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tempTextFahrenheit"
+                degreeFahrenheit="@{String.valueOf(data.current.temp_f)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_medium"
-                android:text="@{String.valueOf(data.current.temp_f)}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_text_size_large"
-                app:layout_constraintStart_toStartOf="@id/tempTextCelsius"
-                app:layout_constraintTop_toBottomOf="@id/tempTextCelsius"
-                tools:text="78 °F" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                imageUrl="@{data.current.condition.icon}"
-                android:layout_width="@dimen/default_weather_condition_image_width"
-                android:layout_height="@dimen/default_weather_condition_image_height"
-                android:layout_marginEnd="@dimen/default_margin_small"
                 app:layout_constraintBottom_toBottomOf="@id/tempTextCelsius"
-                app:layout_constraintEnd_toEndOf="@id/localDateText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/separatorCurrent"
                 app:layout_constraintTop_toTopOf="@id/tempTextCelsius"
-                tools:src="@drawable/ic_launcher_background" />
+                tools:text="78 °F" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/feelsLikeHeader"
@@ -119,23 +124,26 @@
                 android:text="@string/felt_temperature"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_text_size_medium"
-                app:layout_constraintStart_toStartOf="@id/tempTextCelsius"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tempTextFahrenheit" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/feelsLikeTempCelsius"
+                degreeCelsius="@{String.valueOf(data.current.feelslike_c)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin_small"
-                android:text="@{String.valueOf(data.current.feelslike_c)}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/default_text_size_medium"
-                app:layout_constraintStart_toStartOf="@id/feelsLikeHeader"
+                android:textSize="@dimen/default_text_size_large"
+                app:layout_constraintEnd_toStartOf="@id/separatorFelt"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/feelsLikeHeader"
                 tools:text="30°C" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/separator"
+                android:id="@+id/separatorFelt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_xxsmall"
@@ -143,19 +151,22 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_text_size_medium"
                 app:layout_constraintBottom_toBottomOf="@id/feelsLikeTempCelsius"
+                app:layout_constraintEnd_toStartOf="@id/feelsLikeTempFahrenheit"
                 app:layout_constraintStart_toEndOf="@id/feelsLikeTempCelsius"
                 app:layout_constraintTop_toTopOf="@id/feelsLikeTempCelsius" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feelsLikeTempFahrenheit"
+                degreeFahrenheit="@{String.valueOf(data.current.feelslike_f)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_xxsmall"
-                android:text="@{String.valueOf(data.current.feelslike_f)}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/default_text_size_medium"
-                app:layout_constraintBottom_toBottomOf="@id/separator"
-                app:layout_constraintStart_toEndOf="@id/separator"
-                app:layout_constraintTop_toTopOf="@id/separator"
+                android:textSize="@dimen/default_text_size_large"
+                app:layout_constraintBottom_toBottomOf="@id/separatorFelt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/separatorFelt"
+                app:layout_constraintTop_toTopOf="@id/separatorFelt"
                 tools:text="76°F" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -163,9 +174,20 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="@dimen/default_margin_small"
+                android:layout_marginBottom="@dimen/default_margin_small"
                 android:src="@drawable/detail_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/feelsLikeHeader" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/delete"
+                android:layout_marginStart="@dimen/default_margin_small"
+                android:layout_marginBottom="@dimen/default_margin_small"
+                android:src="@drawable/ic_baseline_delete_forever_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

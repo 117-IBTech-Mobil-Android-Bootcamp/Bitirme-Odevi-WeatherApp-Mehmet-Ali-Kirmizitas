@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.R
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.base.IBaseRecyclerViewItemClickListener
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.databinding.ViewPagerItemBinding
+import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.db.entity.Weather
 import com.malikirmizitas.bitirme_odevi_weatherapp_mehmet_ali_kirmizitas.network.response.WeatherResponse
 
 class ViewPagerAdapter(
 ) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
 
     private lateinit var cityNames: ArrayList<WeatherResponse>
-    private var mListener: IBaseRecyclerViewItemClickListener<String>? = null
+    private var mListener: IBaseRecyclerViewItemClickListener<Any>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder {
         return ViewPagerViewHolder(
@@ -30,7 +31,7 @@ class ViewPagerAdapter(
         this.cityNames = cityNames
     }
 
-    fun setListener(listener: IBaseRecyclerViewItemClickListener<String>) {
+    fun setListener(listener: IBaseRecyclerViewItemClickListener<Any>) {
         mListener = listener
     }
 
@@ -50,10 +51,13 @@ class ViewPagerAdapter(
 
         fun setOnClickListener(
             data: WeatherResponse,
-            itemClickListener: IBaseRecyclerViewItemClickListener<String>?
+            itemClickListener: IBaseRecyclerViewItemClickListener<Any>?
         ) {
             binding.detailIcon.setOnClickListener {
-                itemClickListener!!.onClick(data.location.name)
+                itemClickListener!!.onClickForDetail(data.location.name)
+            }
+            binding.delete.setOnClickListener {
+                itemClickListener!!.onClickForDelete(Weather(data.current, data.location))
             }
         }
     }

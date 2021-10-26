@@ -22,7 +22,7 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("feltWithCelsius")
+    @BindingAdapter("degreeCelsius")
     fun setCelsiusText(textView: AppCompatTextView,text : String?){
         textView.text = text.plus("°C")
     }
@@ -37,5 +37,11 @@ object BindingAdapters {
     @BindingAdapter("pressureWithText")
     fun setPressureText(textView: AppCompatTextView,text : String?){
         textView.text = text.plus(" hPa")
+    }
+
+    @JvmStatic
+    @BindingAdapter("degreeFahrenheit")
+    fun setFahrenheitText(textView: AppCompatTextView,text: String?){
+        textView.text = text.plus("°F")
     }
 }

@@ -32,7 +32,7 @@ class AutoCompleteAdapter(
 
         // Custom OnClickListener Setup
         textView.setOnClickListener {
-            mListener?.onClick(textView.text.toString())
+            mListener?.onClickForDetail(textView.text.toString())
         }
 
         return adapterView

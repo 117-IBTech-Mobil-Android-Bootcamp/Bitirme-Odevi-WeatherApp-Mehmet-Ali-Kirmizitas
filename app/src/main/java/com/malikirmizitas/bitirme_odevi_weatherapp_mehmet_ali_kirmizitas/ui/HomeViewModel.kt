@@ -53,6 +53,13 @@ class HomeViewModel(private val weatherRepository: WeatherRepository) : ViewMode
         }
     }
 
+    fun deleteFromDB(weather: Weather){
+        viewModelScope.launch {
+            weatherRepository.deleteItemAsync(weather)
+        }
+        getWeatherFromDB()
+    }
+
     fun getWeatherFromDB() {
         viewModelScope.launch {
             for (weather in weatherRepository.getListAsync()) {

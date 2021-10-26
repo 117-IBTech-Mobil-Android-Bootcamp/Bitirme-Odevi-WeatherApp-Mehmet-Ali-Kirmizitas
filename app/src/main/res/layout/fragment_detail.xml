@@ -127,7 +127,7 @@
                         android:textSize="@dimen/default_text_size_small" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        feltWithCelsius="@{String.valueOf(data.current.feelslike_c)}"
+                        degreeCelsius="@{String.valueOf(data.current.feelslike_c)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
