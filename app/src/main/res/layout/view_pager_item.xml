@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/default_margin_medium"
-        android:layout_marginVertical="@dimen/default_margin_large"
+        android:layout_marginVertical="@dimen/default_margin_medium"
         app:cardBackgroundColor="@color/view_pager_item_background"
         app:cardCornerRadius="@dimen/card_view_default_radius_small"
         app:layout_constraintEnd_toEndOf="parent"
